@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1027623118469",
+    "project_id": "tripit-456789",
+    "storage_bucket": "tripit-456789.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027623118469:android:e34b7c441d49e3454eebec",
+        "android_client_info": {
+          "package_name": "com.example.tripit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeucYsIqJvNgrx_vryo5gbmpH5Uyk-DrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
