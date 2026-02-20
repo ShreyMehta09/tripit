@@ -29,12 +29,14 @@ class _EditTripScreenState extends State<EditTripScreen> {
 
   final List<String> _currencies = ['INR', 'USD', 'EUR', 'GBP'];
   final List<String> _travelStyles = [
+    'Budget',
+    'Mid-Range',
+    'Luxury',
+    'Backpacking',
     'Adventure',
     'Relaxation',
     'Cultural',
-    'Luxury',
-    'Budget',
-    'Family',
+    'Foodie',
   ];
   final List<String> _interestsOptions = [
     'Food',

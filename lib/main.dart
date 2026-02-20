@@ -103,7 +103,6 @@ class TripItApp extends StatelessWidget {
             background: const Color(0xFF121212),
             primary: const Color(0xFF2962FF),
             secondary: const Color(0xFF00B0FF),
-            
           ),
           scaffoldBackgroundColor: const Color(0xFF121212),
           fontFamily: 'Poppins',
