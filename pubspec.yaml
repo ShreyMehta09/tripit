@@ -64,6 +64,14 @@ dependencies:
   provider: ^6.1.2
   flutter_animate: ^4.5.2
 
+  # ===== NOTIFICATIONS =====
+  # Firebase Cloud Messaging - For push notifications
+  firebase_messaging: ^15.2.4
+  # Local notifications - For showing device notifications
+  flutter_local_notifications: ^19.4.0
+  # Mailer - For sending SMTP emails
+  mailer: ^6.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

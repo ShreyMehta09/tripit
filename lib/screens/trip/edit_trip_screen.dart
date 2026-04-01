@@ -145,7 +145,7 @@ class _EditTripScreenState extends State<EditTripScreen> {
                         width: 45,
                         height: 45,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: const Color(0xFF1E1E1E),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -419,6 +419,7 @@ class _EditTripScreenState extends State<EditTripScreen> {
       keyboardType: keyboardType,
       maxLines: maxLines,
       validator: validator,
+      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon),
@@ -426,7 +427,7 @@ class _EditTripScreenState extends State<EditTripScreen> {
           borderRadius: BorderRadius.circular(12),
         ),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: const Color(0xFF1E1E1E),
       ),
     );
   }
@@ -440,23 +441,25 @@ class _EditTripScreenState extends State<EditTripScreen> {
   }) {
     return DropdownButtonFormField<String>(
       value: value,
+      dropdownColor: const Color(0xFF1E1E1E),
+      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: label,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: const Color(0xFF1E1E1E),
       ),
       items: [
         if (allowNull)
           const DropdownMenuItem(
             value: null,
-            child: Text('None'),
+            child: Text('None', style: TextStyle(color: Colors.white)),
           ),
         ...items.map((item) => DropdownMenuItem(
               value: item,
-              child: Text(item),
+              child: Text(item, style: const TextStyle(color: Colors.white)),
             )),
       ],
       onChanged: onChanged,

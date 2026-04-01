@@ -47,7 +47,7 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
                         width: 45,
                         height: 45,
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
+                          color: const Color(0xFF1E1E1E),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -91,7 +91,7 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
                         width: 45,
                         height: 45,
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
+                          color: const Color(0xFF1E1E1E),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -223,7 +223,7 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: const Color(0xFF1E1E1E),
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
@@ -340,7 +340,7 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).cardColor,
+                    color: const Color(0xFF1E1E1E),
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(

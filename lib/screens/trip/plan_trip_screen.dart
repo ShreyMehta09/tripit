@@ -5,6 +5,7 @@ import '../../models/trip_model.dart';
 import '../../services/auth_service.dart';
 import '../../services/gemini_service.dart';
 import '../../services/trip_service.dart';
+import '../../services/notification_service.dart';
 import 'trip_result_screen.dart';
 
 class PlanTripScreen extends StatefulWidget {
@@ -128,6 +129,15 @@ class _PlanTripScreenState extends State<PlanTripScreen> {
       final tripId = await tripService.saveTrip(trip);
       final savedTrip = trip.copyWith(id: tripId);
 
+      // Show local push notification
+      await NotificationService.instance.showTripCreatedNotification(savedTrip);
+
+      // Send email notification to user
+      final userEmail = authService.user?.email;
+      if (userEmail != null) {
+        NotificationService.instance.sendTripEmailNotification(userEmail, savedTrip);
+      }
+
       if (mounted) {
         Navigator.pushReplacement(
           context,
@@ -182,7 +192,7 @@ class _PlanTripScreenState extends State<PlanTripScreen> {
                         width: 45,
                         height: 45,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: const Color(0xFF1E1E1E),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -286,7 +296,7 @@ class _PlanTripScreenState extends State<PlanTripScreen> {
                             hintText: 'Enter destination (e.g., Goa, India)',
                             prefixIcon: const Icon(Icons.location_on_outlined),
                             filled: true,
-                            fillColor: Theme.of(context).cardColor,
+                            fillColor: const Color(0xFF1E1E1E),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -308,7 +318,7 @@ class _PlanTripScreenState extends State<PlanTripScreen> {
                               vertical: 18,
                             ),
                             decoration: BoxDecoration(
-                              color: Theme.of(context).cardColor,
+                              color: const Color(0xFF1E1E1E),
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(
                                 color: Colors.grey.shade200,
@@ -339,7 +349,7 @@ class _PlanTripScreenState extends State<PlanTripScreen> {
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).cardColor,
+                            color: const Color(0xFF1E1E1E),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Row(
@@ -392,7 +402,7 @@ class _PlanTripScreenState extends State<PlanTripScreen> {
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 16),
                               decoration: BoxDecoration(
-                                color: Theme.of(context).cardColor,
+                                color: const Color(0xFF1E1E1E),
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: DropdownButtonHideUnderline(
@@ -421,7 +431,7 @@ class _PlanTripScreenState extends State<PlanTripScreen> {
                                   prefixIcon:
                                       const Icon(Icons.account_balance_wallet_outlined),
                                   filled: true,
-                                  fillColor: Theme.of(context).cardColor,
+                                  fillColor: const Color(0xFF1E1E1E),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -461,7 +471,7 @@ class _PlanTripScreenState extends State<PlanTripScreen> {
                                 decoration: BoxDecoration(
                                   color: isSelected
                                       ? const Color(0xFF6C63FF)
-                                      : Theme.of(context).cardColor,
+                                      : const Color(0xFF1E1E1E),
                                   borderRadius: BorderRadius.circular(20),
                                   border: Border.all(
                                     color: isSelected
@@ -512,7 +522,7 @@ class _PlanTripScreenState extends State<PlanTripScreen> {
                                 decoration: BoxDecoration(
                                   color: isSelected
                                       ? const Color(0xFF4ECDC4)
-                                      : Theme.of(context).cardColor,
+                                      : const Color(0xFF1E1E1E),
                                   borderRadius: BorderRadius.circular(20),
                                   border: Border.all(
                                     color: isSelected
@@ -563,7 +573,7 @@ class _PlanTripScreenState extends State<PlanTripScreen> {
                               child: Icon(Icons.note_alt_outlined),
                             ),
                             filled: true,
-                            fillColor: Theme.of(context).cardColor,
+                            fillColor: const Color(0xFF1E1E1E),
                           ),
                         ),
                         const SizedBox(height: 40),

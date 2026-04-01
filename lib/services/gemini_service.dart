@@ -37,7 +37,7 @@ class GeminiService {
         }
       ],
       'temperature': 0.7,
-      'max_tokens': 8192,
+      'max_tokens': 4096,
       'top_p': 0.95,
     };
 
@@ -84,71 +84,25 @@ class GeminiService {
     }
     
     final prompt = '''
-You are an expert travel planner. Create a detailed, day-by-day travel itinerary for the following trip:
+Create a detailed travel itinerary:
 
-📍 **Destination:** ${request.destination}
-📅 **Start Date:** $startDateStr
-⏱️ **Duration:** ${request.numberOfDays} days
-💰 **Budget:** ${request.budgetCurrency} ${request.budget.toStringAsFixed(0)}
-${request.travelStyle != null ? '🎯 **Travel Style:** ${request.travelStyle}' : ''}
+📍 ${request.destination} | 📅 $startDateStr | ⏱️ ${request.numberOfDays} days | 💰 ${request.budgetCurrency} ${request.budget.toStringAsFixed(0)}
+${request.travelStyle != null ? '🎯 Style: ${request.travelStyle}' : ''}
 $interestsSection
 $specialReqSection
 
-Please provide a comprehensive travel plan including:
+Include:
+1. Trip Overview (brief intro)
+2. Day-by-Day Itinerary (morning/afternoon/evening with timings, food spots, daily budget)
+3. Accommodation (3 options: budget, mid-range, premium with prices)
+4. Budget Breakdown (accommodation, food, transport, activities, total)
+5. Packing Essentials
+6. Local Tips (etiquette, money-saving, foods to try)
+7. Transportation Guide (how to get there and around)
+8. Emergency Info (numbers, hospitals)
+${request.specialRequirements != null ? '9. Special Requirements: "${request.specialRequirements}"' : ''}
 
-1. **Trip Overview** - A brief introduction to the destination and what makes it special. Highlight must-see attractions and unique experiences.
-
-2. **Day-by-Day Itinerary** - For each day include:
-   - Date and day number
-   - Morning activities (with timings, 6 AM - 12 PM)
-   - Afternoon activities (with timings, 12 PM - 6 PM)
-   - Evening activities (with timings, 6 PM onwards)
-   - Recommended restaurants/food spots with cuisine type
-   - Estimated daily budget breakdown
-   ${request.interests != null && request.interests!.isNotEmpty ? '- Include activities related to: ${request.interests!.join(", ")}' : ''}
-
-3. **Accommodation Recommendations** - Suggest 3 options within budget:
-   - Budget-friendly option
-   - Mid-range option
-   - Premium option (if within budget)
-   Include approximate prices per night.
-
-4. **Detailed Budget Breakdown**:
-   - Accommodation (total for all nights)
-   - Food & Dining (daily average × days)
-   - Transportation (local + intercity if applicable)
-   - Activities & Entrance Fees
-   - Shopping & Souvenirs
-   - Miscellaneous/Emergency fund (10%)
-   - **Total Estimated Cost**
-
-5. **Packing Essentials** - Weather-appropriate items, must-have accessories
-
-6. **Local Tips & Hacks**:
-   - Cultural etiquette and customs
-   - Best time to visit popular attractions
-   - Money-saving tips
-   - Best local foods to try
-   - Common scams to avoid
-
-7. **Transportation Guide**:
-   - How to get there (nearest airport/station)
-   - Best ways to get around locally
-   - Approximate transportation costs
-
-8. **Emergency Information**:
-   - Emergency numbers
-   - Nearest hospitals
-   - Embassy/consulate info (for international travel)
-
-${request.specialRequirements != null ? '''
-9. **Accommodating Special Requirements**:
-   Based on "${request.specialRequirements}", here are specific recommendations and considerations for your trip.
-''' : ''}
-
-Format the response in a clean, readable markdown format with emojis to make it visually appealing.
-Use headers (##), bullet points, and bold text for better readability.
-Make sure the total estimated cost stays within or close to the specified budget of ${request.budgetCurrency} ${request.budget.toStringAsFixed(0)}.
+Use markdown with emojis. Keep total cost within ${request.budgetCurrency} ${request.budget.toStringAsFixed(0)}.
 ''';
 
     try {
