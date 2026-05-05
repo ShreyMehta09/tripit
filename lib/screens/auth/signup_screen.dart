@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../services/auth_service.dart';
 import '../home/home_screen.dart';
+import 'email_verification_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -60,9 +61,8 @@ class _SignUpScreenState extends State<SignUpScreen>
     );
 
     if (success && mounted) {
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
-        (route) => false,
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => const EmailVerificationScreen()),
       );
     }
   }
@@ -72,10 +72,17 @@ class _SignUpScreenState extends State<SignUpScreen>
     final success = await authService.signInWithGoogle();
 
     if (success && mounted) {
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
-        (route) => false,
-      );
+      final verified = await authService.isEmailVerified();
+      if (verified) {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
+          (route) => false,
+        );
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const EmailVerificationScreen()),
+        );
+      }
     } else if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

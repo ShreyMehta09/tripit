@@ -71,6 +71,11 @@ class AuthService extends ChangeNotifier {
       await result.user?.reload();
       _user = _auth.currentUser;
 
+      // Send email verification to newly created user
+      try {
+        await _user?.sendEmailVerification();
+      } catch (_) {}
+
       _setLoading(false);
       return true;
     } on FirebaseAuthException catch (e) {
@@ -97,6 +102,10 @@ class AuthService extends ChangeNotifier {
         email: email.trim(),
         password: password,
       );
+
+      // After sign in, refresh user and ensure email verification is considered by caller
+      await _auth.currentUser?.reload();
+      _user = _auth.currentUser;
 
       _setLoading(false);
       return true;
@@ -197,6 +206,27 @@ class AuthService extends ChangeNotifier {
       await _auth.signOut();
     } catch (e) {
       _setError('Failed to sign out. Please try again.');
+    }
+  }
+
+  // Send verification email to current user
+  Future<void> sendEmailVerification() async {
+    try {
+      await _auth.currentUser?.sendEmailVerification();
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  // Check whether current user's email is verified (reloads current user)
+  Future<bool> isEmailVerified() async {
+    try {
+      await _auth.currentUser?.reload();
+      final u = _auth.currentUser;
+      _user = u;
+      return u?.emailVerified ?? false;
+    } catch (e) {
+      return false;
     }
   }
 

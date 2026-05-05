@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../services/auth_service.dart';
 import '../home/home_screen.dart';
+import 'email_verification_screen.dart';
 import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -55,9 +56,16 @@ class _LoginScreenState extends State<LoginScreen>
     );
 
     if (success && mounted) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
-      );
+      final verified = await authService.isEmailVerified();
+      if (verified) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
+        );
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const EmailVerificationScreen()),
+        );
+      }
     }
   }
 
@@ -66,9 +74,16 @@ class _LoginScreenState extends State<LoginScreen>
     final success = await authService.signInWithGoogle();
 
     if (success && mounted) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
-      );
+      final verified = await authService.isEmailVerified();
+      if (verified) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
+        );
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const EmailVerificationScreen()),
+        );
+      }
     } else if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
