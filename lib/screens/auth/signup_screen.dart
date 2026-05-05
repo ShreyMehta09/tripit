@@ -76,6 +76,15 @@ class _SignUpScreenState extends State<SignUpScreen>
         MaterialPageRoute(builder: (_) => const HomeScreen()),
         (route) => false,
       );
+    } else if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            authService.errorMessage ?? 'Google sign-in failed',
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 

@@ -125,6 +125,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
     final user = authService.user;
+    final colorScheme = Theme.of(context).colorScheme;
+    final surfaceColor = colorScheme.surface;
+    final onSurfaceColor = colorScheme.onSurface;
+    final onSurfaceVariant = colorScheme.onSurfaceVariant;
 
     return Scaffold(
       body: Container(
@@ -236,42 +240,71 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ? const Center(child: CircularProgressIndicator())
                     : SingleChildScrollView(
                         padding: const EdgeInsets.all(20),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _buildTextField(
-                                controller: _nameController,
-                                label: 'Display Name',
-                                icon: Icons.person_rounded,
-                                validator: (value) => value?.isEmpty ?? true
-                                    ? 'Name is required'
-                                    : null,
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: surfaceColor,
+                            borderRadius: BorderRadius.circular(24),
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.08),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.18),
+                                blurRadius: 24,
+                                offset: const Offset(0, 10),
                               ),
-                              const SizedBox(height: 16),
-                              _buildTextField(
-                                controller: _phoneController,
-                                label: 'Phone Number',
-                                icon: Icons.phone_rounded,
-                                keyboardType: TextInputType.phone,
-                              ),
-                              const SizedBox(height: 16),
-                              _buildTextField(
-                                controller: _locationController,
-                                label: 'Location',
-                                icon: Icons.location_on_rounded,
-                              ),
-                              const SizedBox(height: 16),
-                              _buildTextField(
-                                controller: _bioController,
-                                label: 'Bio',
-                                icon: Icons.edit_note_rounded,
-                                maxLines: 4,
-                                hint: 'Tell us about yourself...',
-                              ),
-                              const SizedBox(height: 32),
                             ],
+                          ),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _buildTextField(
+                                  controller: _nameController,
+                                  label: 'Display Name',
+                                  icon: Icons.person_rounded,
+                                  textColor: onSurfaceColor,
+                                  labelColor: onSurfaceVariant,
+                                  fillColor: colorScheme.surfaceContainerHighest,
+                                  validator: (value) => value?.isEmpty ?? true
+                                      ? 'Name is required'
+                                      : null,
+                                ),
+                                const SizedBox(height: 16),
+                                _buildTextField(
+                                  controller: _phoneController,
+                                  label: 'Phone Number',
+                                  icon: Icons.phone_rounded,
+                                  textColor: onSurfaceColor,
+                                  labelColor: onSurfaceVariant,
+                                  fillColor: colorScheme.surfaceContainerHighest,
+                                  keyboardType: TextInputType.phone,
+                                ),
+                                const SizedBox(height: 16),
+                                _buildTextField(
+                                  controller: _locationController,
+                                  label: 'Location',
+                                  icon: Icons.location_on_rounded,
+                                  textColor: onSurfaceColor,
+                                  labelColor: onSurfaceVariant,
+                                  fillColor: colorScheme.surfaceContainerHighest,
+                                ),
+                                const SizedBox(height: 16),
+                                _buildTextField(
+                                  controller: _bioController,
+                                  label: 'Bio',
+                                  icon: Icons.edit_note_rounded,
+                                  textColor: onSurfaceColor,
+                                  labelColor: onSurfaceVariant,
+                                  fillColor: colorScheme.surfaceContainerHighest,
+                                  maxLines: 4,
+                                  hint: 'Tell us about yourself...',
+                                ),
+                                const SizedBox(height: 32),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -322,6 +355,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     required TextEditingController controller,
     required String label,
     required IconData icon,
+    required Color textColor,
+    required Color labelColor,
+    required Color fillColor,
     String? hint,
     TextInputType? keyboardType,
     String? Function(String?)? validator,
@@ -332,15 +368,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
       keyboardType: keyboardType,
       maxLines: maxLines,
       validator: validator,
+      style: TextStyle(color: textColor),
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
-        prefixIcon: Icon(icon),
+        labelStyle: TextStyle(color: labelColor),
+        hintStyle: TextStyle(color: labelColor.withOpacity(0.75)),
+        prefixIcon: Icon(icon, color: labelColor),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: labelColor.withOpacity(0.2)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Color(0xFF6C63FF), width: 1.5),
+        ),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: fillColor,
       ),
     );
   }

@@ -12,7 +12,12 @@
           "package_name": "com.example.tripit"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1027623118469-ed4nlts0jo3alav4rutk9132hr6okjaa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBeucYsIqJvNgrx_vryo5gbmpH5Uyk-DrY"
@@ -20,7 +25,63 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027623118469-ed4nlts0jo3alav4rutk9132hr6okjaa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027623118469-27u8pqsn3abk5e9eisht9f0pgpgvbtrd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tripit"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027623118469:android:e0e1b874dec674ea4eebec",
+        "android_client_info": {
+          "package_name": "com.shrey.tripit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027623118469-sseqdntnfs8k5ecehkq42nrpj5hpbau8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shrey.tripit",
+            "certificate_hash": "ddecab424eeaae19000b747085379224e6f51ffa"
+          }
+        },
+        {
+          "client_id": "1027623118469-ed4nlts0jo3alav4rutk9132hr6okjaa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeucYsIqJvNgrx_vryo5gbmpH5Uyk-DrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027623118469-ed4nlts0jo3alav4rutk9132hr6okjaa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027623118469-27u8pqsn3abk5e9eisht9f0pgpgvbtrd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tripit"
+              }
+            }
+          ]
         }
       }
     }

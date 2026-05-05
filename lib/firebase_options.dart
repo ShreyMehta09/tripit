@@ -56,7 +56,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBeucYsIqJvNgrx_vryo5gbmpH5Uyk-DrY',
-    appId: '1:1027623118469:android:e34b7c441d49e3454eebec',
+    appId: '1:1027623118469:android:e0e1b874dec674ea4eebec',
     messagingSenderId: '1027623118469',
     projectId: 'tripit-456789',
     storageBucket: 'tripit-456789.firebasestorage.app',
@@ -68,6 +68,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1027623118469',
     projectId: 'tripit-456789',
     storageBucket: 'tripit-456789.firebasestorage.app',
+    androidClientId: '1027623118469-sseqdntnfs8k5ecehkq42nrpj5hpbau8.apps.googleusercontent.com',
+    iosClientId: '1027623118469-27u8pqsn3abk5e9eisht9f0pgpgvbtrd.apps.googleusercontent.com',
     iosBundleId: 'com.example.tripit',
   );
 

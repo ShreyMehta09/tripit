@@ -69,6 +69,15 @@ class _LoginScreenState extends State<LoginScreen>
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => const HomeScreen()),
       );
+    } else if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            authService.errorMessage ?? 'Google sign-in failed',
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 

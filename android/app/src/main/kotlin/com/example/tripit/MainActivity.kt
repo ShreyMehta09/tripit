@@ -1,4 +1,4 @@
-package com.example.tripit
+package com.shrey.tripit
 
 import io.flutter.embedding.android.FlutterActivity
 
